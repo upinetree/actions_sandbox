@@ -1,0 +1,20 @@
+name: Lint for an issue body
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  ensure-issue-description-content:
+    runs-on: ubuntu-latest
+    name: 'Ensure issue description has an expected word'
+    steps:
+      - name: 'Check if description contains a specific keyword in the template'
+        run: |
+          echo ${{ github.event.issue.body }} | grep -v 'テンプレだよ' && echo "invalid_body=true" >> $GITHUB_ENV
+      - name: 'Comment this result to an issue'
+        if: ${{ env.invalid_body == 'true' }}
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            issue の説明にテンプレートを利用してください
