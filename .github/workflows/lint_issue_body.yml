@@ -10,9 +10,9 @@ jobs:
     steps:
       - name: 'Check if description contains a specific keyword in the template'
         run: |
-          echo "${{ github.event.issue.body }}" | tr -d '\r\n' | grep -v 'テンプレだよ' && echo "invalid_body=true" >> $GITHUB_ENV
+          echo "${{ github.event.issue.body }}" | tr -d '\r\n' | grep 'テンプレだよ'
       - name: 'Comment this result to an issue'
-        if: ${{ env.invalid_body == 'true' }}
+        if: ${{ failure() }}
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.issue.number }}
