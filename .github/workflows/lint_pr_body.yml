@@ -16,8 +16,11 @@ jobs:
           git fetch --depth 1 origin ${{ github.base_ref }}
       - name: 'Check if target files are included in a PR'
         run: |
-          git diff origin/${{ github.base_ref }} HEAD --name-only --diff-filter=AM | grep oneshot/
-          test $? -eq 0 && echo "target_file_exists=true" >> $GITHUB_ENV || echo "no target files!"
+          if (git diff origin/${{ github.base_ref }} HEAD --name-only --diff-filter=AM | grep oneshot/); then
+            echo "target_file_exists=true" >> $GITHUB_ENV
+          else
+            echo "no target files!"
+          fi
       - name: 'Check if PR description contains a specific keyword in the template'
         if: ${{ env.target_file_exists == 'true' }}
         run: |
