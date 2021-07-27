@@ -1,7 +1,9 @@
 name: Lint for a pull request body
 on:
   pull_request:
-  push: # レビュー用のサンプルブランチ用
+    types:
+      - opened
+      - edited # レビュー用のサンプルブランチ用
 
 jobs:
   ensure-pr-description-content:
