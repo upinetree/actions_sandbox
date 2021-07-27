@@ -20,10 +20,13 @@ jobs:
           TARGET_FILES_PATTERN: oneshot/
           VALID_PATTERN: テンプレだよ
         run: bash actions/lint_pr_body.sh
-      - name: 'Comment this result to a pull request' # このあとラベルなかったらつけるのも試したい https://github.com/actions/starter-workflows/blob/8ba0ca0797f1852b9f689a07c015c19bc723c980/automation/label.yml
+      - name: 'Comment this result to a pull request'
         if: ${{ env.invalid_body == 'true' }}
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             pull request の説明にテンプレートを利用してください
+      - uses: andymckay/labeler@1.0.3
+        with:
+          add-labels: "oneshot"
