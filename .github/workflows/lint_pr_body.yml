@@ -24,7 +24,11 @@ jobs:
       - name: 'Check if PR description contains a specific keyword in the template'
         if: ${{ env.target_file_exists == 'true' }}
         run: |
-          echo "${{ github.event.pull_request.body }}" | tr -d '\r\n' | grep -v 'テンプレだよ' && echo "invalid_body=true" >> $GITHUB_ENV
+          if (echo "${{ github.event.pull_request.body }}" | tr -d '\r\n' | grep -v 'テンプレだよ'); then
+            echo "invalid_body=true" >> $GITHUB_ENV
+          else
+            echo "valid pull request body!"
+          fi
       - name: 'Comment this result to a pull request' # このあとラベルなかったらつけるのも試したい https://github.com/actions/starter-workflows/blob/8ba0ca0797f1852b9f689a07c015c19bc723c980/automation/label.yml
         if: ${{ env.invalid_body == 'true' }}
         uses: peter-evans/create-or-update-comment@v1
