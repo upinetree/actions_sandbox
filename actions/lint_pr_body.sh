@@ -2,9 +2,9 @@
 
 set -xu
 
-git diff origin/$GITHUB_BASE_REF HEAD --name-only --diff-filter=AM | grep -v $TARGET_FILES_PATTERN
+git diff origin/$GITHUB_BASE_REF HEAD --name-only --diff-filter=AM | grep $TARGET_FILES_PATTERN
 
-if [ $? -eq 0 ]; then
+if [ $? -eq 1 ]; then
   echo "no target files!"
   exit 0
 fi
