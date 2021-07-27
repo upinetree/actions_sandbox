@@ -16,7 +16,7 @@ jobs:
           git fetch --depth 1 origin ${{ github.base_ref }}
       - name: 'Check if a pull request description is expeced as its file diffs'
         env:
-          PULL_REQUEST_BODY: ${{ github.event.pull_request.body }}
+          PULL_REQUEST_BODY: "${{ github.event.pull_request.body }}"
           TARGET_FILES_PATTERN: oneshot/
           VALID_PATTERN: テンプレだよ
         run: bash actions/lint_pr_body.sh
