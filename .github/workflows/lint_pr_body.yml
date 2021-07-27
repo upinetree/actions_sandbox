@@ -27,6 +27,6 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             pull request の説明にテンプレートを利用してください
-      - uses: andymckay/labeler@1.0.3
+      - uses: upinetree/labeler@fix-pull-request-param
         with:
           add-labels: "oneshot"
