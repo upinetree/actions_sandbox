@@ -1,0 +1,15 @@
+name: Label pull requests
+on:
+  pull_request:
+    types:
+      - opened
+      - edited # for testing
+
+jobs:
+  label_pulls:
+    runs-on: ubuntu-latest
+    name: Label pull requests
+    steps:
+      - uses: upinetree/labeler@fix-pull-request-param
+        with:
+          add-labels: "hello"
