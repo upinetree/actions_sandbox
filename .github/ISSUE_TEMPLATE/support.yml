@@ -52,3 +52,9 @@ body:
           required: true
         - label: ccc
           required: true
+  - type: input
+    attributes:
+      label: 通知テスト
+      description: 一次担当者への通知用だよ。変更しないでね
+      value: |
+        @upinetree
