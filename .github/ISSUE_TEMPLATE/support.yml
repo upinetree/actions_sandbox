@@ -45,6 +45,7 @@ body:
       label: 起票前の確認
       description: |
         以下を確認してね
+        複数行の description はどうなるんだろう
       options:
         - label: aaa
           required: true
