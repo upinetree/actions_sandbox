@@ -1,0 +1,52 @@
+name: サポート依頼
+description: サポート依頼だよ
+title: 分かりやすいタイトル
+labels: ""
+assignees: ""
+body:
+  - type: markdown
+    attributes:
+      value: |
+        サポート依頼ありがとう。長いけどがんばって書いてね
+  - type: textarea
+    attributes:
+      label: 概略
+      description: 簡単な説明を書いてね
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: タイプ
+      options:
+        - A
+        - B
+        - C
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: ID
+      description: hoge ID をいれてね
+  - type: textarea
+    attributes:
+      label: 解決したいこと
+      description: 期待値合わせをしたいので明示してね
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 詳細
+      description: その他ログなどをできるだけ詳細に書いてね
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: 起票前の確認
+      description: |
+        以下を確認してね
+        - aaa
+        - bbb
+        - ccc
+      options:
+        - label: OK!
+          required: true
