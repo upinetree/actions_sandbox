@@ -1,8 +1,8 @@
 name: サポート依頼
 description: サポート依頼だよ
 title: 分かりやすいタイトル
-labels: ""
-assignees: ""
+labels: []
+assignees: []
 body:
   - type: markdown
     attributes:
