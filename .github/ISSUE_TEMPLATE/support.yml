@@ -14,13 +14,14 @@ body:
       description: 簡単な説明を書いてね
     validations:
       required: true
-  - type: checkboxes
+  - type: dropdown
     attributes:
       label: タイプ
       options:
         - A
         - B
         - C
+      multiple: true
     validations:
       required: true
   - type: input
