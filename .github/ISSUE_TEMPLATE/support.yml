@@ -45,9 +45,10 @@ body:
       label: 起票前の確認
       description: |
         以下を確認してね
-        - aaa
-        - bbb
-        - ccc
       options:
-        - label: OK!
+        - label: aaa
+          required: true
+        - label: bbb
+          required: true
+        - label: ccc
           required: true
