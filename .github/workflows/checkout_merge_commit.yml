@@ -20,6 +20,8 @@ jobs:
             const pr_number = ${{ github.event.inputs.pull-request-number }};
             console.log('pull-request-number', pr_number);
 
+            console.log('pull-request-number from getIpnut', core.getInput('pull-request-number'));
+
             const { data: pr } = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
