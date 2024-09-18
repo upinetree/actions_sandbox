@@ -20,7 +20,7 @@ jobs:
             const pr_number = ${{ github.event.inputs.pull-request-number }};
             console.log('pull-request-number', pr_number);
 
-            console.log('pull-request-number from getIpnut', core.getInput('pull-request-number'));
+            console.log('pull-request-number from core.getInput', core.getInput('pull-request-number')); // 取れない…
 
             const { data: pr } = await github.rest.pulls.get({
               owner: context.repo.owner,
@@ -29,12 +29,9 @@ jobs:
             });
             console.log('merge_commit_sha', pr.merge_commit_sha);
             core.exportVariable('MERGE_COMMIT_SHA', pr.merge_commit_sha);
-      - name: output the merge commit sha
-        run: |
-          echo ${{ env.MERGE_COMMIT_SHA }}
-          echo $MERGE_COMMIT_SHA
-
-      # - name: Checkout the merge commit
-      #   uses: actions/checkout@v4
-      #   with:
-      #     ref: ${{ env.MERGE_COMMIT_SHA }}
+      - name: Checkout the merge commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.MERGE_COMMIT_SHA }}
+      - name: Show the commit log
+        run: git show
