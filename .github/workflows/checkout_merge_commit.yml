@@ -2,7 +2,7 @@ name: Checkout merge commit from pull request
 on:
   workflow_dispatch:
     inputs:
-      pull_request_number:
+      pull-request-number:
         description: "Pull request number"
         required: true
         type: number
@@ -17,13 +17,13 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const pr_number = ${{ github.event.inputs.pull_request_number }};
-            console.log('pull_request_number', pr_number);
+            const pr_number = ${{ github.event.inputs.pull-request-number }};
+            console.log('pull-request-number', pr_number);
 
             const { data: pr } = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: ${{ github.event.inputs.pull_request_number }}
+              pull_number: ${{ github.event.inputs.pull-request-number }}
             });
             console.log('merge_commit_sha', pr.merge_commit_sha);
             core.exportVariable('MERGE_COMMIT_SHA', pr.merge_commit_sha);
