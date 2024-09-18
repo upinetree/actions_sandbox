@@ -1,0 +1,38 @@
+name: Checkout merge commit from pull request
+on:
+  workflow_dispatch:
+    inputs:
+      pull_request_number:
+        description: "Pull request number"
+        required: true
+        type: number
+
+jobs:
+  checkout-merge-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch the target commit sha
+        id: git-sha
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr_number = ${{ github.event.inputs.pull_request_number }};
+            console.log('pull_request_number', pr_number);
+
+            const { data: pr } = await github.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: ${{ github.event.inputs.pull_request_number }}
+            });
+            console.log('merge_commit_sha', pr.merge_commit_sha);
+            core.setOutput('MERGE_COMMIT_SHA', pr.merge_commit_sha);
+      - name: output the merge commit sha
+        run: |
+          echo ${{ env.MERGE_COMMIT_SHA }}
+          echo $MERGE_COMMIT_SHA
+
+      # - name: Checkout the merge commit
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: ${{ env.MERGE_COMMIT_SHA }}
