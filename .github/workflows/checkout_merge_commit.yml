@@ -20,7 +20,7 @@ jobs:
             const pr_number = ${{ github.event.inputs.pull_request_number }};
             console.log('pull_request_number', pr_number);
 
-            const { data: pr } = await github.pulls.get({
+            const { data: pr } = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: ${{ github.event.inputs.pull_request_number }}
