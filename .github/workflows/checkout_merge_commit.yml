@@ -35,3 +35,16 @@ jobs:
           ref: ${{ env.MERGE_COMMIT_SHA }}
       - name: Show the commit log
         run: git show
+
+  post-job:
+    needs: checkout-merge-commit
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        value: [1, 2]
+    steps:
+      - name: Post job
+        run: |
+          echo "Post job ${{ matrix.value }}"
+          echo "pull-request-number: ${{ github.event.inputs.pull-request-number }}"
+          echo "pull-request-number from inputs: ${{ inputs.pull-request-number }}"
